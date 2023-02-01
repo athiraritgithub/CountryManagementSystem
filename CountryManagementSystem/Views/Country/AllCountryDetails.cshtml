@@ -1,0 +1,14 @@
+﻿@model CountryManagementSystem.Models.Country
+@{
+    ViewBag.Title = "AllCountryDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AllCountryDetails</h2>
+
+<ul>
+    @foreach (var currency in Model.currencies)
+            {
+                <li>@currency</li>
+            }
+</ul>
