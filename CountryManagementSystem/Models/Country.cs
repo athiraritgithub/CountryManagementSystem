@@ -13,10 +13,4 @@ namespace CountryManagementSystem.Models
         public string[] borders { get; set; }
         public List<Currency> currencies { get; set; }
     }
-    public class Currency
-    {
-        public string code { get; set; }
-        public string name { get; set; }
-        public string symbol { get; set; }
-    }
 }

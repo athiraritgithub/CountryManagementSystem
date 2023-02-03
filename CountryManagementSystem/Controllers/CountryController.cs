@@ -12,20 +12,23 @@ namespace CountryManagementSystem.Controllers
 {
     public class CountryController : Controller
     {
-        [HttpPost]
         public ActionResult AllCountryDetails(CountryRequestModel countryViewRequest)
         {
             string countryJsonData = ApiCall(countryViewRequest.CallingCode);
             List<Country> countries = JsonConvert.DeserializeObject<List<Country>>(countryJsonData);
-
-            CountryViewModel countryViewModel= new CountryViewModel();
-            countryViewModel.Name = countries[0].name;
-            countryViewModel.Subregion= countries[0].subregion;
-            countryViewModel.Population= countries[0].population;
-            countryViewModel.Borders= countries[0].borders;
-            countryViewModel.Currencies= countries[0].currencies;
-            //countryViewModel.Currencies = countries[0].currencies;
-            return View(countryViewModel);
+            List<CountryViewModel> model = new List<CountryViewModel>();
+            CountryViewModel countryViewModel1;
+            foreach (var country in countries)
+            {
+                countryViewModel1 = new CountryViewModel();
+                countryViewModel1.Name = country.name;
+                countryViewModel1.Subregion = country.subregion;
+                countryViewModel1.Population = country.population;
+                countryViewModel1.Borders = country.borders;
+                countryViewModel1.Currencies = country.currencies;
+                model.Add(countryViewModel1);
+            }
+            return View(model);
         }
         public static string ApiCall(string callingCode)
         {
